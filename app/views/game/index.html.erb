@@ -148,6 +148,9 @@
 <%= form_tag("board/new", method: "get") do %>
   <%= label_tag(:coord, "Coordinates:") %>
   <%= text_field_tag(:coord) %>
+  <%= label_tag(:direction, "Direction:") %>
+  <%= text_field_tag(:direction) %>
+  <%= hidden_field_tag :ship, 0 %>
   <%= submit_tag "Enter Coordinates", class: "coordinates" %>
 <% end %>
 

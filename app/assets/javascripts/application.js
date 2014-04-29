@@ -31,10 +31,13 @@ Game.prototype.bindevents = function() {
         data = $(this).serialize()
         $.ajax({
             type: 'GET',
-            url: 'board/new',
+            url: 'game/placeships',
             data: data,
             success: function(res) {
-                $('.shiploc').append(res)
+                console.log(res)
+                if (typeof res === 'string') {
+                    $('.shiploc').append(res)
+                }
             },
             error: function() {
                 console.log('no')
