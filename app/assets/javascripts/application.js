@@ -36,10 +36,11 @@ Game.prototype.bindevents = function() {
             success: function(res) {
                 console.log(res);
                 var j = res[1] + res[2];
+                var i = res[1]
                 if (typeof res === 'string') {
                     $('.shiploc').append(res)
                 } else {
-                    for (var i = res[1]; i < j; i++) {
+                    for (i; i < j; i++) {
                         $('tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').css('background-color', 'black')
                     }
                 }
@@ -49,4 +50,8 @@ Game.prototype.bindevents = function() {
             }
         })
     })
+}
+
+function addHor() {
+
 }

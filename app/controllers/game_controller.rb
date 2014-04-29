@@ -9,6 +9,7 @@ class GameController < ApplicationController
     @game = session[:game]
     @game.enter_coordinates(@game.player.ships[params[:ship].to_i], params[:coord], params[:direction])
     b = @game.place_ships(@game.player.ships[params[:ship].to_i],'human', @game.player.board)
+    p @game.player.board
     render json: b.to_json
   end
 
