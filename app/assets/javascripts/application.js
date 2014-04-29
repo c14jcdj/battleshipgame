@@ -14,3 +14,31 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+$(document).on('ready', function() {
+    a = new Game
+    a.bindevents()
+
+
+})
+
+function Game() {}
+
+Game.prototype.bindevents = function() {
+    $("form").on('submit', function(e) {
+        e.preventDefault();
+        data = $(this).serialize()
+        $.ajax({
+            type: 'GET',
+            url: 'board/new',
+            data: data,
+            success: function(res) {
+                $('.shiploc').append(res)
+            },
+            error: function() {
+                console.log('no')
+            }
+        })
+    })
+}

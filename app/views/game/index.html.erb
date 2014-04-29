@@ -145,10 +145,12 @@
 </table>
 
 <div class='coord'>
-<%= form_tag("game/new", method: "get") do %>
+<%= form_tag("board/new", method: "get") do %>
   <%= label_tag(:coord, "Coordinates:") %>
   <%= text_field_tag(:coord) %>
-  <%= submit_tag("Enter Coordinates") %>
+  <%= submit_tag "Enter Coordinates", class: "coordinates" %>
 <% end %>
+
+<div class="shiploc"></div>
 
 </div>
