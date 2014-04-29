@@ -14,7 +14,7 @@
 
 table {
   /*border: 1px solid red;*/
-  margin: 0 auto;
+  float: left;
 }
 
 td {
@@ -36,4 +36,13 @@ tr {
 tr td:nth-child(1) {
   text-align: center;
   border: none;
+}
+
+.coord {
+  border: 1px solid black;
+  float: left;
+  margin-left:20%;
+  margin-top: 5%;
+  width: 200px;
+  height: 200px;
 }

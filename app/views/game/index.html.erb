@@ -143,3 +143,12 @@
     <td></td>
   </tr>
 </table>
+
+<div class='coord'>
+<%= form_tag("game/new", method: "get") do %>
+  <%= label_tag(:coord, "Coordinates:") %>
+  <%= text_field_tag(:coord) %>
+  <%= submit_tag("Enter Coordinates") %>
+<% end %>
+
+</div>
