@@ -34,9 +34,14 @@ Game.prototype.bindevents = function() {
             url: 'game/placeships',
             data: data,
             success: function(res) {
-                console.log(res)
+                console.log(res);
+                var j = res[1] + res[2];
                 if (typeof res === 'string') {
                     $('.shiploc').append(res)
+                } else {
+                    for (var i = res[1]; i < j; i++) {
+                        $('tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').css('background-color', 'black')
+                    }
                 }
             },
             error: function() {
