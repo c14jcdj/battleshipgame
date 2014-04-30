@@ -70,47 +70,6 @@ class Battleship
     !board.board.flatten.include?("*")
   end
 
-
-
-  # def place_ships(ships,player_type, board)
-  #   ships.each do |ship|
-  #     check = false
-  #     while check==false
-  #       player_type == 'human' ? view.prompt_user(ship) : computer.get_coor(ship)
-  #       row = board.row_decoder[ship.row.upcase]
-  #       col = ship.col.to_i
-  #       if ship.direction[0] == "h"
-  #         if board.board[row][col..col+ship.length].include?("*") || col+ship.length > 11
-  #           puts "Can't place ship here"
-  #           check = false
-  #         else
-  #           board.place_ship(ship)
-  #           view.print_board(board) if player_type == 'human'
-  #           check = true
-  #         end
-  #       else
-  #         vert = []
-  #         if row + ship.length > 11
-  #           vert << "*"
-  #         else
-  #           ship.length.times do
-  #             vert << board.board[row][col]
-  #             row +=1
-  #           end
-  #         end
-  #         if vert.include?("*") || ship.direction == ""
-  #           puts "Can't place ship here"
-  #           check = false
-  #         else
-  #           board.place_ship(ship)
-  #           view.print_board(board) if player_type == 'human'
-  #           check = true
-  #         end
-  #       end
-  #     end
-  #   end
-  # end
-
   def place_ships(ship,player_type, board)
     row = board.row_decoder[ship.row.upcase]
     col = ship.col.to_i

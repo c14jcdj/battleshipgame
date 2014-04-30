@@ -17,54 +17,83 @@
 
 
 $(document).on('ready', function() {
-    a = new Game
-    a.bindevents()
+    game = new Game
+    view = new View
+    game.bindevents(view)
 
 
 })
 
 function Game() {}
 
-Game.prototype.bindevents = function() {
-    $("form").on('submit', function(e) {
-        e.preventDefault();
-        data = $(this).serialize()
-        $.ajax({
-            type: 'GET',
-            url: 'game/placeships',
-            data: data,
-            success: function(res) {
-                console.log(res);
+function View() {}
 
-                if (typeof res === 'string') {
-                    $('.shiploc').append(res)
-                } else {
-                    if (res[3] == 'horizontal') {
-                        addHor(res);
+Game.prototype = {
+    bindevents: function(view) {
+        view.placeAircraftCarrier();
+    }
+
+
+}
+
+// function addHor(res) {
+
+// }
+
+// function addVert(res) {
+
+// }
+
+View.prototype = {
+    placeAircraftCarrier: function() {
+        var that = this
+        $("form").on('submit', function(e) {
+            $('.shiploc').empty();
+            e.preventDefault();
+            data = $(this).serialize()
+            $.ajax({
+                type: 'GET',
+                url: 'game/placeships',
+                data: data,
+                success: function(res) {
+                    console.log(res);
+                    if (typeof res === 'string') {
+                        $('.shiploc').append(res)
+                        console.log($(this)[0])
+                        $('form')[0].reset();
+                        // that.placeAircraftCarrier();
                     } else {
-                        addVert(res);
+                        if (res[3] == 'horizontal') {
+                            that.addHor(res);
+                        } else {
+                            that.addVert(res);
+                        }
                     }
+                },
+                error: function() {
+                    console.log('no')
                 }
-            },
-            error: function() {
-                console.log('no')
-            }
+            })
         })
-    })
-}
+    },
 
-function addHor(res) {
-    var j = res[1] + res[2];
-    var i = res[1]
-    for (i; i < j; i++) {
-        $('tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').css('background-color', 'black')
+    addHor: function(res) {
+        var j = res[1] + res[2];
+        var i = res[1]
+        for (i; i < j; i++) {
+            $('tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').css('background-color', 'black')
+        }
+    },
+
+    addVert: function(res) {
+        var i = res[0];
+        var j = res[0] + res[2];
+        for (i; i < j; i++) {
+            $('tr:nth-child(' + (res[0] + i) + ') td:nth-child(' + (res[1] + 1) + ')').css('background-color', 'black')
+        }
     }
 }
 
-function addVert(res) {
-    var i = res[1];
-    var j = res[1] + res[2];
-    for (i; i < j; i++) {
-        $('tr:nth-child(' + (res[0] + i) + ') td:nth-child(' + (res[1] + 1) + ')').css('background-color', 'black')
-    }
-}
+// function placeAircraftCarrier() {
+
+// }
