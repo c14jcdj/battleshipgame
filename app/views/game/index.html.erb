@@ -145,11 +145,14 @@
 </table>
 
 <div class='coord'>
+    <h4>Enter Coordinates for your <span>Aircraft Carrier</span></h4>
 <%= form_tag("board/new", method: "get") do %>
-  <%= label_tag(:coord, "Coordinates:") %>
-  <%= text_field_tag(:coord) %>
-  <%= label_tag(:direction, "Direction:") %>
-  <%= text_field_tag(:direction) %>
+  <%= label_tag(:coord, "Starting Square:") %>
+  <%= text_field_tag(:coord) %><br>
+  <%= radio_button_tag(:direction, "horizontal") %>
+  <%= label_tag(:direction, "Horizontal (right)") %><br>
+  <%= radio_button_tag(:direction, "vertical") %>
+  <%= label_tag(:direction, "Vertical (down)") %>
   <%= hidden_field_tag :ship, 0 %>
   <%= submit_tag "Enter Coordinates", class: "coordinates" %>
 <% end %>

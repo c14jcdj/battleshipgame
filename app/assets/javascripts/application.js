@@ -35,13 +35,14 @@ Game.prototype.bindevents = function() {
             data: data,
             success: function(res) {
                 console.log(res);
-                var j = res[1] + res[2];
-                var i = res[1]
+
                 if (typeof res === 'string') {
                     $('.shiploc').append(res)
                 } else {
-                    for (i; i < j; i++) {
-                        $('tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').css('background-color', 'black')
+                    if (res[3] == 'horizontal') {
+                        addHor(res);
+                    } else {
+                        addVert(res);
                     }
                 }
             },
@@ -52,6 +53,18 @@ Game.prototype.bindevents = function() {
     })
 }
 
-function addHor() {
+function addHor(res) {
+    var j = res[1] + res[2];
+    var i = res[1]
+    for (i; i < j; i++) {
+        $('tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').css('background-color', 'black')
+    }
+}
 
+function addVert(res) {
+    var i = res[1];
+    var j = res[1] + res[2];
+    for (i; i < j; i++) {
+        $('tr:nth-child(' + (res[0] + i) + ') td:nth-child(' + (res[1] + 1) + ')').css('background-color', 'black')
+    }
 }

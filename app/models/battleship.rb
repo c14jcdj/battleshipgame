@@ -136,7 +136,7 @@ class Battleship
         return "Can't place ship here"
       else
         board.place_ship(ship)
-        return [row,col,ship.length,ship.direction]
+        return [row-ship.length,col,ship.length,ship.direction]
       end
     end
   end
