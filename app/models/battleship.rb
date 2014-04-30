@@ -114,6 +114,7 @@ class Battleship
   def place_ships(ship,player_type, board)
     row = board.row_decoder[ship.row.upcase]
     col = ship.col.to_i
+    return "Can't place ship here" if row == nil || col == nil
     if ship.direction[0] == "h"
       if board.board[row][col..col+ship.length].include?("*") || col+ship.length > 11
         return "Can't place ship here"
