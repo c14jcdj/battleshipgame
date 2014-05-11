@@ -1,9 +1,10 @@
 class Ship
 
-  attr_accessor :length, :row, :col, :direction
+  attr_accessor :length, :row, :col, :direction, :name
 
-  def initialize(length, row=nil, col=nil, direction=nil)
+  def initialize(length,name, row=nil, col=nil, direction=nil)
     @length = length
+    @name = name
     @row = row
     @col = col
     @direction = direction

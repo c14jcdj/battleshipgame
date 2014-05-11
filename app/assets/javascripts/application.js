@@ -59,12 +59,11 @@ View.prototype = {
                     console.log(res);
                     if (typeof res === 'string') {
                         $('.shiploc').append(res)
-                        console.log($(this)[0])
                         $('form')[0].reset();
-                        // that.placeAircraftCarrier();
                     } else {
                         if (res[3] == 'horizontal') {
                             that.addHor(res);
+                            that.placeBattleship();
                         } else {
                             that.addVert(res);
                         }
@@ -93,7 +92,3 @@ View.prototype = {
         }
     }
 }
-
-// function placeAircraftCarrier() {
-
-// }
