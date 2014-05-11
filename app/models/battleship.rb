@@ -70,7 +70,7 @@ class Battleship
     !board.board.flatten.include?("*")
   end
 
-  def place_ships(ship,player_type, board)
+  def place_ships(ship,player_type, board, shipInd)
     row = board.row_decoder[ship.row.upcase]
     col = ship.col.to_i
     return "Can't place ship here" if row == nil || col == nil
@@ -79,7 +79,7 @@ class Battleship
         return "Can't place ship here"
       else
         board.place_ship(ship)
-        return [row,col,ship.length,ship.direction]
+        return [row,col,ship.length,ship.direction, shipInd]
       end
     else
       vert = []
@@ -95,7 +95,7 @@ class Battleship
         return "Can't place ship here"
       else
         board.place_ship(ship)
-        return [row-ship.length,col,ship.length,ship.direction]
+        return [row-ship.length,col,ship.length,ship.direction, shipInd]
       end
     end
   end

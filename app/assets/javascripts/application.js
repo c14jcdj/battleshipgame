@@ -47,10 +47,11 @@ Game.prototype = {
 View.prototype = {
     placeAircraftCarrier: function() {
         var that = this
+        var shipInd = 0
         $("form").on('submit', function(e) {
             $('.shiploc').empty();
             e.preventDefault();
-            data = $(this).serialize()
+            var data = $(this).serialize() + '&ship=' + shipInd + '';
             $.ajax({
                 type: 'GET',
                 url: 'game/placeships',
@@ -61,11 +62,17 @@ View.prototype = {
                         $('.shiploc').append(res)
                         $('form')[0].reset();
                     } else {
+                        shipInd = res.slice(-1)[0] + 1;
                         if (res[3] == 'horizontal') {
                             that.addHor(res);
-                            that.placeBattleship();
+                            if (shipInd == 5) {
+                                console.log('winner')
+                            }
                         } else {
                             that.addVert(res);
+                            if (shipInd == 5) {
+                                console.log('winner')
+                            }
                         }
                     }
                 },
