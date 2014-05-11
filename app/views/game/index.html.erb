@@ -146,7 +146,7 @@
 
 <div class='coord'>
     <h4>Enter Coordinates for your <span>Aircraft Carrier</span></h4>
-<%= form_tag("board/new", method: "get") do %>
+<%= form_tag("game/placeships", method: "get") do %>
   <%= label_tag(:coord, "Starting Square:") %>
   <%= text_field_tag(:coord) %><br>
   <%= radio_button_tag(:direction, "horizontal") %>
