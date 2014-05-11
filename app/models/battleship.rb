@@ -71,8 +71,13 @@ class Battleship
   end
 
   def place_ships(ship,player_type, board, shipInd)
-    row = board.row_decoder[ship.row.upcase]
-    col = ship.col.to_i
+    if player_type == "human"
+      row = board.row_decoder[ship.row.upcase]
+      col = ship.col.to_i
+    else
+      row = (1..10).to_a.sample
+      col = (1..10).to_a.sample
+    end
     return "Can't place ship here" if row == nil || col == nil
     if ship.direction[0] == "h"
       if board.board[row][col..col+ship.length].include?("*") || col+ship.length > 11

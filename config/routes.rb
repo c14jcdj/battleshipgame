@@ -3,5 +3,6 @@ Battleshipgame::Application.routes.draw do
   root 'game#index'
 
   get 'game/placeships', :to => 'game#placeships'
-  resources :game, :board
+  get 'game/placecomp', :to => 'game#placecomp'
+  resources :game
 end

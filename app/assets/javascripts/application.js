@@ -30,7 +30,11 @@ function View() {}
 
 Game.prototype = {
     bindevents: function(view) {
-        view.placeAircraftCarrier();
+        view.placeAircraftCarrier(this);
+    },
+
+    placecomp: function() {
+        console.log('yo')
     }
 
 
@@ -45,7 +49,8 @@ Game.prototype = {
 // }
 
 View.prototype = {
-    placeAircraftCarrier: function() {
+    placeAircraftCarrier: function(game) {
+        var game = game
         var that = this
         var shipInd = 0
         $("form").on('submit', function(e) {
@@ -66,12 +71,12 @@ View.prototype = {
                         if (res[3] == 'horizontal') {
                             that.addHor(res);
                             if (shipInd == 5) {
-                                console.log('winner')
+                                game.placecomp();
                             }
                         } else {
                             that.addVert(res);
                             if (shipInd == 5) {
-                                console.log('winner')
+                                game.placecomp();
                             }
                         }
                     }
