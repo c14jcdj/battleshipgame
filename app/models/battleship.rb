@@ -53,14 +53,14 @@ class Battleship
         board.board[row][col] = "X"
         # check = check_board(computer.board)
         # computer_attack
-        return "HIT"
+        return ["HIT", row, col]
       elsif board.board[row][col] == "X" || board.board[row][col] == "/"
-          return "Error"
+          return ["Error"]
       else
         board.board[row][col] = "/"
         # check = check_board(computer.board)
         # computer_attack
-        return "MISS"
+        return ["MISS", row, col]
       end
     # end
     # puts 'You Win!'

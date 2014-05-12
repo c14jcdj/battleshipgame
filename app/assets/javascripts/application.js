@@ -57,12 +57,12 @@ Game.prototype = {
                 data: data,
                 success: function(res) {
                     console.log(res)
-                    if (res == "HIT") {
-                        view.hit()
-                    } else if (res == "MISS") {
-                        view.miss()
+                    if (res[0] == "HIT") {
+                        view.hit(res[1], res[2])
+                    } else if (res[0] == "MISS") {
+                        view.miss(res[1], res[2])
                     } else {
-                        view.displayError();
+                        view.displayError(res[0]);
                     }
                 },
                 error: function() {
@@ -146,15 +146,23 @@ View.prototype = {
         game.attack(this);
     },
 
-    hit: function() {
+    hit: function(row, col) {
         console.log('that was a hit')
+        console.log(col)
+        console.log(row)
+        $('#computer tr:nth-child(' + (row + 1) + ') td:nth-child(' + (col + 1) + ')').css('background-color', 'red')
     },
 
-    miss: function() {
+    miss: function(row, col) {
         console.log('that was a miss')
+        console.log(col)
+        console.log(row)
+        $('#computer tr:nth-child(' + (row + 1) + ') td:nth-child(' + (col + 1) + ')').css('background-color', 'blue')
+
     },
 
-    displayError: function() {
+    displayError: function(res) {
         console.log('You already tried that')
+        $('.error').append(res)
     }
 }
