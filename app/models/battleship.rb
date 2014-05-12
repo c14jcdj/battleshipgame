@@ -87,7 +87,8 @@ class Battleship
         return "Can't place ship here"
       else
         board.place_ship(ship, board)
-        return [row,col,ship.length,ship.direction, shipInd]
+        # return [row,col,ship.length,ship.direction, shipInd]
+        return [row,ship, shipInd]
       end
     else
       vert = []
@@ -103,7 +104,8 @@ class Battleship
         return "Can't place ship here"
       else
         board.place_ship(ship, board)
-        return [row-ship.length,col,ship.length,ship.direction, shipInd]
+        # return [row-ship.length,col,ship.length,ship.direction, shipInd]
+        return [row-ship.length, ship, shipInd]
       end
     end
   end

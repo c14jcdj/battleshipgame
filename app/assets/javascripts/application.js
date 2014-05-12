@@ -72,12 +72,15 @@ View.prototype = {
                 data: data,
                 success: function(res) {
                     console.log(res);
+                    console.log(res[1].col)
+                    console.log(res[1].length)
+                    console.log(res[1].direction)
                     if (typeof res === 'string') {
                         $('.shiploc').append(res)
                         $('form')[0].reset();
                     } else {
                         shipInd = res.slice(-1)[0] + 1;
-                        if (res[3] == 'horizontal') {
+                        if (res[1].direction == 'horizontal') {
                             that.addHor(res);
                             if (shipInd == 5) {
                                 game.placecomp();
@@ -98,18 +101,23 @@ View.prototype = {
     },
 
     addHor: function(res) {
-        var j = res[1] + res[2];
-        var i = res[1]
+        // var j = res[1] + res[2];
+        // var i = res[1]
+        var j = parseInt(res[1].col) + parseInt(res[1].length);
+        var i = parseInt(res[1].col)
+        console.log(j)
+        console.log(i)
         for (i; i < j; i++) {
+            console.log('i' + i + '')
             $('tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').css('background-color', 'black')
         }
     },
 
     addVert: function(res) {
         var i = res[0];
-        var j = res[0] + res[2];
+        var j = res[0] + parseInt(res[1].length);
         for (i; i < j; i++) {
-            $('tr:nth-child(' + (res[0] + i) + ') td:nth-child(' + (res[1] + 1) + ')').css('background-color', 'black')
+            $('tr:nth-child(' + (res[0] + i) + ') td:nth-child(' + (parseInt(res[1].col) + 1) + ')').css('background-color', 'black')
         }
     }
 }
