@@ -62,6 +62,13 @@ View.prototype = {
         var game = game
         var that = this
         var shipInd = 0
+        var shipNames = {
+            0: "AirCraft Carrier",
+            1: "Battleship",
+            2: "Submarine",
+            3: "Cruiser",
+            4: "Destroyer"
+        }
         $("form").on('submit', function(e) {
             $('.shiploc').empty();
             e.preventDefault();
@@ -71,15 +78,14 @@ View.prototype = {
                 url: 'game/placeships',
                 data: data,
                 success: function(res) {
-                    console.log(res);
-                    console.log(res[1].col)
-                    console.log(res[1].length)
-                    console.log(res[1].direction)
+                    console.log(res)
+                    console.log(shipNames[shipInd])
                     if (typeof res === 'string') {
                         $('.shiploc').append(res)
                         $('form')[0].reset();
                     } else {
                         shipInd = res.slice(-1)[0] + 1;
+                        $('.coord span').html('' + shipNames[shipInd] + '')
                         if (res[1].direction == 'horizontal') {
                             that.addHor(res);
                             if (shipInd == 5) {
@@ -101,12 +107,8 @@ View.prototype = {
     },
 
     addHor: function(res) {
-        // var j = res[1] + res[2];
-        // var i = res[1]
         var j = parseInt(res[1].col) + parseInt(res[1].length);
         var i = parseInt(res[1].col)
-        console.log(j)
-        console.log(i)
         for (i; i < j; i++) {
             console.log('i' + i + '')
             $('tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').css('background-color', 'black')
