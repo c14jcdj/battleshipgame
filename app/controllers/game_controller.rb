@@ -43,4 +43,8 @@ class GameController < ApplicationController
 
   end
 
+  def attack
+    render json: true
+  end
+
 end

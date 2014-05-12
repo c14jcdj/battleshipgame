@@ -44,6 +44,13 @@ Game.prototype = {
                 console.log('no')
             }
         })
+    },
+
+    attack: function() {
+        $('form').on('submit', function(e) {
+            e.preventDefault();
+            console.log('yuppers')
+        })
     }
 
 
@@ -121,8 +128,8 @@ View.prototype = {
     },
 
     placeAttackBox: function(res) {
-        console.log('yooooo')
         $('.coord').empty()
         $(".coord").append(res)
+        game.attack();
     }
 }
