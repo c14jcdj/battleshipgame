@@ -56,13 +56,6 @@ Game.prototype = {
 
 }
 
-// function addHor(res) {
-
-// }
-
-// function addVert(res) {
-
-// }
 
 View.prototype = {
     placeAircraftCarrier: function(game) {
@@ -123,7 +116,7 @@ View.prototype = {
         var i = res[0];
         var j = res[0] + parseInt(res[1].length);
         for (i; i < j; i++) {
-            $('tr:nth-child(' + (res[0] + i) + ') td:nth-child(' + (parseInt(res[1].col) + 1) + ')').css('background-color', 'black')
+            $('#player tr:nth-child(' + (res[0] + i) + ') td:nth-child(' + (parseInt(res[1].col) + 1) + ')').css('background-color', 'black')
         }
     },
 
