@@ -42,25 +42,25 @@ class Battleship
 
   end
 
-  def attack(coord)
+  def attack(coord, board)
     # check = false
     # until check
       # view.prompt_attack
       # attack = gets.chomp
-      row = computer.board.row_decoder[attack[0].upcase]
-      col = attack.length == 3 ? 10 : attack[1].to_i
-      if computer.board.board[row][col] == "*" || computer.board.board[row][col] == "X"
-        puts "hit"
-        computer.board.board[row][col] = "X"
-        check = check_board(computer.board)
-        view.print_board(computer.board)
-        computer_attack
+      row = board.row_decoder[coord[0].upcase]
+      col = coord.length == 3 ? 10 : coord[1].to_i
+      if board.board[row][col] == "*"
+        board.board[row][col] = "X"
+        # check = check_board(computer.board)
+        # computer_attack
+        return "HIT"
+      elsif board.board[row][col] == "X" || board.board[row][col] == "/"
+          return "Error"
       else
-        puts "miss"
-        computer.board.board[row][col] = "/"
-        check = check_board(computer.board)
-        view.print_board(computer.board)
-        computer_attack
+        board.board[row][col] = "/"
+        # check = check_board(computer.board)
+        # computer_attack
+        return "MISS"
       end
     # end
     # puts 'You Win!'

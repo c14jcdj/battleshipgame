@@ -49,8 +49,8 @@ class GameController < ApplicationController
     puts "+++++++++++"
 
     game = session[:game]
-    # game.attack(params[:coord])
-    render json: true
+    response = game.attack(params[:coord], game.computer.board)
+    render json: response.to_json
   end
 
 end

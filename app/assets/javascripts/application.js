@@ -46,7 +46,8 @@ Game.prototype = {
         })
     },
 
-    attack: function() {
+    attack: function(view) {
+        var view = view
         $('form').on('submit', function(e) {
             e.preventDefault();
             var data = $(this).serialize();
@@ -56,6 +57,13 @@ Game.prototype = {
                 data: data,
                 success: function(res) {
                     console.log(res)
+                    if (res == "HIT") {
+                        view.hit()
+                    } else if (res == "MISS") {
+                        view.miss()
+                    } else {
+                        view.displayError();
+                    }
                 },
                 error: function() {
                     console.log('error')
@@ -135,6 +143,18 @@ View.prototype = {
     placeAttackBox: function(res) {
         $('.coord').empty()
         $(".coord").append(res)
-        game.attack();
+        game.attack(this);
+    },
+
+    hit: function() {
+        console.log('that was a hit')
+    },
+
+    miss: function() {
+        console.log('that was a miss')
+    },
+
+    displayError: function() {
+        console.log('You already tried that')
     }
 }
