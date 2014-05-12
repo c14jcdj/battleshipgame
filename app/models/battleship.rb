@@ -42,11 +42,11 @@ class Battleship
 
   end
 
-  def attack
-    check = false
-    until check
-      view.prompt_attack
-      attack = gets.chomp
+  def attack(coord)
+    # check = false
+    # until check
+      # view.prompt_attack
+      # attack = gets.chomp
       row = computer.board.row_decoder[attack[0].upcase]
       col = attack.length == 3 ? 10 : attack[1].to_i
       if computer.board.board[row][col] == "*" || computer.board.board[row][col] == "X"
@@ -62,11 +62,11 @@ class Battleship
         view.print_board(computer.board)
         computer_attack
       end
-    end
-    puts 'You Win!'
+    # end
+    # puts 'You Win!'
   end
 
-  def check_board(board)
+  def winner?(board)
     !board.board.flatten.include?("*")
   end
 
@@ -87,7 +87,6 @@ class Battleship
         return "Can't place ship here"
       else
         board.place_ship(ship, board)
-        # return [row,col,ship.length,ship.direction, shipInd]
         return [row,ship, shipInd]
       end
     else
@@ -104,7 +103,6 @@ class Battleship
         return "Can't place ship here"
       else
         board.place_ship(ship, board)
-        # return [row-ship.length,col,ship.length,ship.direction, shipInd]
         return [row-ship.length, ship, shipInd]
       end
     end

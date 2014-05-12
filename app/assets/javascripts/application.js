@@ -49,7 +49,19 @@ Game.prototype = {
     attack: function() {
         $('form').on('submit', function(e) {
             e.preventDefault();
-            console.log('yuppers')
+            var data = $(this).serialize();
+            $.ajax({
+                type: 'GET',
+                url: 'game/attack',
+                data: data,
+                success: function(res) {
+                    console.log(res)
+                },
+                error: function() {
+                    console.log('error')
+                }
+            })
+
         })
     }
 

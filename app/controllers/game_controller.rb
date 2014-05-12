@@ -44,6 +44,12 @@ class GameController < ApplicationController
   end
 
   def attack
+    puts "--------------"
+    p params
+    puts "+++++++++++"
+
+    game = session[:game]
+    # game.attack(params[:coord])
     render json: true
   end
 
