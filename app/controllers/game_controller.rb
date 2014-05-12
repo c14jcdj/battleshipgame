@@ -39,7 +39,7 @@ class GameController < ApplicationController
       end
       puts
     end
-    render json: true
+    render :partial => 'attack'
 
   end
 

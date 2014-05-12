@@ -38,7 +38,7 @@ Game.prototype = {
             type: 'GET',
             url: 'game/placecomp',
             success: function(res) {
-                console.log(res)
+                view.placeAttackBox(res);
             },
             error: function() {
                 console.log('no')
@@ -78,8 +78,6 @@ View.prototype = {
                 url: 'game/placeships',
                 data: data,
                 success: function(res) {
-                    console.log(res)
-                    console.log(shipNames[shipInd])
                     if (typeof res === 'string') {
                         $('.shiploc').append(res)
                         $('form')[0].reset();
@@ -110,8 +108,7 @@ View.prototype = {
         var j = parseInt(res[1].col) + parseInt(res[1].length);
         var i = parseInt(res[1].col)
         for (i; i < j; i++) {
-            console.log('i' + i + '')
-            $('tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').css('background-color', 'black')
+            $('#player tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').css('background-color', 'black')
         }
     },
 
@@ -121,5 +118,11 @@ View.prototype = {
         for (i; i < j; i++) {
             $('tr:nth-child(' + (res[0] + i) + ') td:nth-child(' + (parseInt(res[1].col) + 1) + ')').css('background-color', 'black')
         }
+    },
+
+    placeAttackBox: function(res) {
+        console.log('yooooo')
+        $('.coord').empty()
+        $(".coord").append(res)
     }
 }

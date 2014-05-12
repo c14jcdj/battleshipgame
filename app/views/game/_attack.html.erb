@@ -1,0 +1,6 @@
+<h4>Enter Coordinates for your your attack</h4>
+<%= form_tag("game/attack", method: "get") do %>
+  <%= label_tag(:coord, "Coordinates:") %>
+  <%= text_field_tag(:coord) %><br>
+  <%= submit_tag "Enter Coordinates", class: "coordinates" %>
+<% end %>
