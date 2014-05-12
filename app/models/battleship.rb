@@ -22,21 +22,20 @@ class Battleship
     ship.col = square.length == 3 ? 10 : square[1]
   end
 
-  def computer_attack
-    row = computer.board.row_decoder[('a'..'j').to_a.sample.upcase]
+  def computer_attack(board)
+    row = board.row_decoder[('a'..'j').to_a.sample.upcase]
     col = (1..10).to_a.sample
-    if player.board.board[row][col] == "*" || player.board.board[row][col] == "X"
-      puts "Computer hits your ship"
-      player.board.board[row][col] = 'X'
-      view.print_board(player.board)
-      check = check_board(player.board)
-      return "You Lose" if check == true
+    if board.board[row][col] == "*"
+      board.board[row][col] = 'X'
+      # view.print_board(player.board)
+      check = winner?(player.board)
+      return ["HIT",row,col, check]
+    elsif board.board[row][col] == "X" || board.board[row][col] == "/"
+      computer_attack(board)
     else
-      puts "Computer misses your ship"
-      player.board.board[row][col] = '/'
-      view.print_board(player.board)
-      check = check_board(player.board)
-      return "You Lose" if check == true
+      board.board[row][col] = '/'
+      check = winner?(player.board)
+      return ["MISS",row, col, check]
     end
 
 

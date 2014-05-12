@@ -53,4 +53,10 @@ class GameController < ApplicationController
     render json: response.to_json
   end
 
+ def compattack
+    game = session[:game]
+    response = game.computer_attack(game.player.board)
+    render json: response
+ end
+
 end

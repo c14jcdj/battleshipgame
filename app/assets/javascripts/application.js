@@ -59,10 +59,10 @@ Game.prototype = {
                 success: function(res) {
                     console.log(res)
                     if (res[0] == "HIT") {
-                        view.hit(res[1], res[2])
+                        view.hit(res[1], res[2], 'computer')
                         setTimeout(that.compattack, 2000)
                     } else if (res[0] == "MISS") {
-                        view.miss(res[1], res[2])
+                        view.miss(res[1], res[2], 'computer')
                         setTimeout(that.compattack, 2000)
                     } else {
                         view.displayError(res[0]);
@@ -80,13 +80,25 @@ Game.prototype = {
     },
 
     compattack: function() {
-        // $.ajax({
-        //     type: 'GET',
-        //     url: 'game/placeships',
-        //     data: data,
-        //     success: function(res) {}
-        // })
-        console.log('comp attacking')
+        $.ajax({
+            type: 'GET',
+            url: 'game/compattack',
+            success: function(res) {
+                console.log(res)
+                if (res[0] == "HIT") {
+                    view.hit(res[1], res[2], 'player')
+                    setTimeout(that.compattack, 2000)
+                } else if (res[0] == "MISS") {
+                    view.miss(res[1], res[2], 'player')
+                    setTimeout(that.compattack, 2000)
+                } else {
+                    view.displayError(res[0]);
+                }
+                if (res.slice(-1)[0] == true) {
+                    alert('loser')
+                }
+            }
+        })
     }
 
 
@@ -162,20 +174,20 @@ View.prototype = {
         game.attack(this);
     },
 
-    hit: function(row, col) {
+    hit: function(row, col, table) {
         console.log('that was a hit')
         console.log(col)
         console.log(row)
         $('.error').empty();
-        $('#computer tr:nth-child(' + (row + 1) + ') td:nth-child(' + (col + 1) + ')').css('background-color', 'red')
+        $('#' + table + ' tr:nth-child(' + (row + 1) + ') td:nth-child(' + (col + 1) + ')').css('background-color', 'red')
     },
 
-    miss: function(row, col) {
+    miss: function(row, col, table) {
         console.log('that was a miss')
         console.log(col)
         console.log(row)
         $('.error').empty();
-        $('#computer tr:nth-child(' + (row + 1) + ') td:nth-child(' + (col + 1) + ')').css('background-color', 'blue')
+        $('#' + table + ' tr:nth-child(' + (row + 1) + ') td:nth-child(' + (col + 1) + ')').css('background-color', 'blue')
 
     },
 
