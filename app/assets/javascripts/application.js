@@ -48,6 +48,7 @@ Game.prototype = {
 
     attack: function(view) {
         var view = view
+        var that = this
         $('form').on('submit', function(e) {
             e.preventDefault();
             var data = $(this).serialize();
@@ -59,18 +60,33 @@ Game.prototype = {
                     console.log(res)
                     if (res[0] == "HIT") {
                         view.hit(res[1], res[2])
+                        setTimeout(that.compattack, 2000)
                     } else if (res[0] == "MISS") {
                         view.miss(res[1], res[2])
+                        setTimeout(that.compattack, 2000)
                     } else {
                         view.displayError(res[0]);
                     }
+                    if (res.slice(-1)[0] == true) {
+                        alert('winner')
+                    }
                 },
                 error: function() {
-                    console.log('error')
+                    console.log('here i am')
                 }
             })
 
         })
+    },
+
+    compattack: function() {
+        // $.ajax({
+        //     type: 'GET',
+        //     url: 'game/placeships',
+        //     data: data,
+        //     success: function(res) {}
+        // })
+        console.log('comp attacking')
     }
 
 
@@ -150,6 +166,7 @@ View.prototype = {
         console.log('that was a hit')
         console.log(col)
         console.log(row)
+        $('.error').empty();
         $('#computer tr:nth-child(' + (row + 1) + ') td:nth-child(' + (col + 1) + ')').css('background-color', 'red')
     },
 
@@ -157,12 +174,13 @@ View.prototype = {
         console.log('that was a miss')
         console.log(col)
         console.log(row)
+        $('.error').empty();
         $('#computer tr:nth-child(' + (row + 1) + ') td:nth-child(' + (col + 1) + ')').css('background-color', 'blue')
 
     },
 
     displayError: function(res) {
-        console.log('You already tried that')
-        $('.error').append(res)
+        $('.error').empty();
+        $('.error').append(res);
     }
 }

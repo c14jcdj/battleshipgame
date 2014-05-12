@@ -51,16 +51,16 @@ class Battleship
       col = coord.length == 3 ? 10 : coord[1].to_i
       if board.board[row][col] == "*"
         board.board[row][col] = "X"
-        # check = check_board(computer.board)
+        check = winner?(computer.board)
         # computer_attack
-        return ["HIT", row, col]
+        return ["HIT", row, col, check]
       elsif board.board[row][col] == "X" || board.board[row][col] == "/"
-          return ["Error"]
+          return ["You already entered those coordinates"]
       else
         board.board[row][col] = "/"
-        # check = check_board(computer.board)
+        check = winner?(computer.board)
         # computer_attack
-        return ["MISS", row, col]
+        return ["MISS", row, col, check]
       end
     # end
     # puts 'You Win!'
