@@ -34,7 +34,16 @@ Game.prototype = {
     },
 
     placecomp: function() {
-        console.log('yo')
+        $.ajax({
+            type: 'GET',
+            url: 'game/placecomp',
+            success: function(res) {
+                console.log(res)
+            },
+            error: function() {
+                console.log('no')
+            }
+        })
     }
 
 

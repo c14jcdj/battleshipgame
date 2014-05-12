@@ -75,15 +75,18 @@ class Battleship
       row = board.row_decoder[ship.row.upcase]
       col = ship.col.to_i
     else
-      row = (1..10).to_a.sample
-      col = (1..10).to_a.sample
+      ship.row = %w(A B C D E F G H I J).sample
+      ship.col = (1..10).to_a.sample
+      row = board.row_decoder[ship.row.upcase]
+      col = ship.col.to_i
+      ship.direction = ["hor", "vert"].sample
     end
     return "Can't place ship here" if row == nil || col == nil
     if ship.direction[0] == "h"
       if board.board[row][col..col+ship.length].include?("*") || col+ship.length > 11
         return "Can't place ship here"
       else
-        board.place_ship(ship)
+        board.place_ship(ship, board)
         return [row,col,ship.length,ship.direction, shipInd]
       end
     else
@@ -99,7 +102,7 @@ class Battleship
       if vert.include?("*") || ship.direction == ""
         return "Can't place ship here"
       else
-        board.place_ship(ship)
+        board.place_ship(ship, board)
         return [row-ship.length,col,ship.length,ship.direction, shipInd]
       end
     end

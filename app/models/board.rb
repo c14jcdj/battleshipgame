@@ -20,17 +20,17 @@ def initialize
     @row_decoder =  Hash[b.zip(a)]
   end
 
-  def place_ship(ship)
+  def place_ship(ship, board)
     row = row_decoder[ship.row.upcase]
     col = ship.col.to_i
     if ship.direction[0].downcase == "h"
       ship.length.times do
-        board[row][col] = '*'
+        board.board[row][col] = '*'
         col += 1
       end
     else
       ship.length.times do
-        board[row][col] = '*'
+        board.board[row][col] = '*'
         row +=1
       end
     end
