@@ -87,10 +87,8 @@ Game.prototype = {
                 console.log(res)
                 if (res[0] == "HIT") {
                     view.hit(res[1], res[2], 'player')
-                    setTimeout(that.compattack, 2000)
                 } else if (res[0] == "MISS") {
                     view.miss(res[1], res[2], 'player')
-                    setTimeout(that.compattack, 2000)
                 } else {
                     view.displayError(res[0]);
                 }

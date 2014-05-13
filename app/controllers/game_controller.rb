@@ -3,6 +3,7 @@ class GameController < ApplicationController
   def index
     @game = Battleship.new(Player.new, Computer.new)
     session[:game] = @game
+    session[:choices] = (1..100).to_a
   end
 
   def placeships
@@ -55,7 +56,12 @@ class GameController < ApplicationController
 
  def compattack
     game = session[:game]
-    response = game.computer_attack(game.player.board)
+    # session[:choices].shuffle!
+    choices = session[:choices].pop
+    response = game.computer_attack(game.player.board, choices)
+    puts "================"
+    p session[:choices].length
+    puts "================"
     render json: response
  end
 

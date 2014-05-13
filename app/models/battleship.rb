@@ -22,11 +22,28 @@ class Battleship
     ship.col = square.length == 3 ? 10 : square[1]
   end
 
-  def computer_attack(board)
-    c = board.choices.shuffle.pop
+  def get_choice
+    c = (1..100).to_a
+    a = (1..10).to_a
+    b = %w(A B C D E F G H I J)
+    choices = []
+    b.each do |letter|
+      a.each do |num|
+        choices << letter + num.to_s
+      end
+    end
+    Hash[c.zip(choices)]
+  end
+
+  def computer_attack(board, choices)
+    # c = board.choices.shuffle.pop
+
+    choice_hash =  get_choice
+    # choice = choices.shuffle.pop
+    c = choice_hash[choices]
     puts"++++++++++++"
     p c
-    p board.choices.length
+    # p board.choices.length
     puts"++++++++++++"
     row = board.row_decoder[c[0]]
     col = c.length == 3 ? 10 : c[1].to_i
