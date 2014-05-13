@@ -23,22 +23,23 @@ class Battleship
   end
 
   def computer_attack(board)
-    row = board.row_decoder[('a'..'j').to_a.sample.upcase]
-    col = (1..10).to_a.sample
+    c = board.choices.shuffle.pop
+    puts"++++++++++++"
+    p c
+    p board.choices.length
+    puts"++++++++++++"
+    row = board.row_decoder[c[0]]
+    col = c.length == 3 ? 10 : c[1].to_i
     if board.board[row][col] == "*"
       board.board[row][col] = 'X'
       # view.print_board(player.board)
       check = winner?(player.board)
       return ["HIT",row,col, check]
-    elsif board.board[row][col] == "X" || board.board[row][col] == "/"
-      computer_attack(board)
     else
       board.board[row][col] = '/'
       check = winner?(player.board)
       return ["MISS",row, col, check]
     end
-
-
   end
 
   def attack(coord, board)
