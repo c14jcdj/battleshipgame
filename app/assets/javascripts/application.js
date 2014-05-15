@@ -93,7 +93,7 @@ Game.prototype = {
                     view.displayError(res[0]);
                 }
                 if (res.slice(-1)[0] == true) {
-                    alert('loser')
+                    setTimeout(view.displayLoser, 1000)
                 }
             }
         })
@@ -194,5 +194,9 @@ View.prototype = {
     displayError: function(res) {
         $('.error').empty();
         $('.error').append(res);
+    },
+
+    displayLoser: function() {
+        alert('Loser!')
     }
 }
