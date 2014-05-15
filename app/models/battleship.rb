@@ -38,9 +38,10 @@ class Battleship
   def computer_attack(board, choices)
     # c = board.choices.shuffle.pop
 
-    choice_hash =  get_choice
+    # choice_hash =  get_choice
     # choice = choices.shuffle.pop
-    c = choice_hash[choices]
+    # c = choice_hash[choices]
+    c = choices
     puts"++++++++++++"
     p c
     # p board.choices.length
@@ -67,6 +68,9 @@ class Battleship
       return["Invalid Coordinates"] if coord[1].to_i == 0
       row = board.row_decoder[coord[0].upcase]
       col = coord.length == 3 ? 10 : coord[1].to_i
+      puts "++++++++++++++"
+      p board.board[row][col]
+      puts "++++++++++++++"
       if board.board[row][col] == "*"
         board.board[row][col] = "X"
         check = winner?(computer.board)
@@ -91,7 +95,7 @@ class Battleship
   def place_ships(ship,player_type, board, shipInd)
     if player_type == "human"
       row = board.row_decoder[ship.row.upcase]
-      return "Enter Number for Column" if ship.col.to_i == 0
+      return "Invalid Coordinates" if ship.col.to_i == 0
       col = ship.col.to_i
     else
       ship.row = %w(A B C D E F G H I J).sample
@@ -102,11 +106,6 @@ class Battleship
     end
     return "Can't place ship here" if row == nil || col == nil
     if ship.direction[0] == "h"
-    puts ")))))))))))))))"
-p row
-p col
-    p board.board[row][col...col+ship.length]
-    puts ")))))))))))))))"
       if board.board[row][col...col+ship.length].include?("*") || col+ship.length > 11
         return "Can't place ship here"
       else

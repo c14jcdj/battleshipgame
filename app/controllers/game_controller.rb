@@ -3,7 +3,22 @@ class GameController < ApplicationController
   def index
     @game = Battleship.new(Player.new, Computer.new)
     session[:game] = @game
-    session[:choices] = (1..100).to_a
+    $redis.flushall
+    test = []
+    a = %w(A B C D E F G H I J)
+    b = (1..10).to_a
+    test = []
+    a.each do |x|
+      b.each do |y|
+         test << x + y.to_s
+      end
+    end
+
+    $redis.rpush('choices', test.shuffle )
+    puts "+++++++++++++"
+    p $redis.lrange('choices', 0, -1)
+    puts "+++++++++++++"
+    # session[:choices] = (1..100).to_a
   end
 
   def placeships
@@ -54,20 +69,35 @@ class GameController < ApplicationController
     puts "--------------"
     p params
     puts "+++++++++++"
-
     game = session[:game]
+    game.computer.board.board.each do |x|
+      x.each do |y|
+        print "#{y}\t"
+      end
+      puts
+    end
     response = game.attack(params[:coord], game.computer.board)
+    game.computer.board.board.each do |x|
+      x.each do |y|
+        print "#{y}\t"
+      end
+      puts
+    end
     render json: response.to_json
   end
 
  def compattack
     game = session[:game]
+    puts "[[[[[[[[[[[[[[["
+
+    p $redis.llen('choices')
+    p choices = $redis.rpop('choices')
+    p $redis.llen('choices')
+    puts "[[[[[[[[[[[[[[["
     # session[:choices].shuffle!
-    choices = session[:choices].pop
+    # choices = session[:choices].pop
     response = game.computer_attack(game.player.board, choices)
-    puts "================"
-    p session[:choices].length
-    puts "================"
+
     render json: response
  end
 
