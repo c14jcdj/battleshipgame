@@ -65,10 +65,17 @@ class Battleship
     # until check
       # view.prompt_attack
       # attack = gets.chomp
+      taken = $redis.lrange('taken choices', 0, -1)
+      puts "+++++++++++++++"
+      p taken
+      puts "+++++++++++++++"
       return["Invalid Coordinates"] if coord[1].to_i == 0
+      return ["You already entered those coordinates"] if taken.include?(coord)
       row = board.row_decoder[coord[0].upcase]
       col = coord.length == 3 ? 10 : coord[1].to_i
       puts "++++++++++++++"
+      p row
+      p col
       p board.board[row][col]
       puts "++++++++++++++"
       if board.board[row][col] == "*"
@@ -76,8 +83,8 @@ class Battleship
         check = winner?(computer.board)
         # computer_attack
         return ["HIT", row, col, check]
-      elsif board.board[row][col] == "X" || board.board[row][col] == "/"
-          return ["You already entered those coordinates"]
+      # elsif board.board[row][col] == "X" || board.board[row][col] == "/"
+      #     return ["You already entered those coordinates"]
       else
         board.board[row][col] = "/"
         check = winner?(computer.board)

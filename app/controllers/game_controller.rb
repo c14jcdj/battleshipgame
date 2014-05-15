@@ -70,19 +70,8 @@ class GameController < ApplicationController
     p params
     puts "+++++++++++"
     game = session[:game]
-    game.computer.board.board.each do |x|
-      x.each do |y|
-        print "#{y}\t"
-      end
-      puts
-    end
     response = game.attack(params[:coord], game.computer.board)
-    game.computer.board.board.each do |x|
-      x.each do |y|
-        print "#{y}\t"
-      end
-      puts
-    end
+    $redis.rpush('taken choices', params[:coord] )
     render json: response.to_json
   end
 
