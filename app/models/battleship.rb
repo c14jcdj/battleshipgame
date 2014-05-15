@@ -100,7 +100,12 @@ class Battleship
     end
     return "Can't place ship here" if row == nil || col == nil
     if ship.direction[0] == "h"
-      if board.board[row][col..col+ship.length].include?("*") || col+ship.length > 11
+    puts ")))))))))))))))"
+p row
+p col
+    p board.board[row][col...col+ship.length]
+    puts ")))))))))))))))"
+      if board.board[row][col...col+ship.length].include?("*") || col+ship.length > 11
         return "Can't place ship here"
       else
         board.place_ship(ship, board)

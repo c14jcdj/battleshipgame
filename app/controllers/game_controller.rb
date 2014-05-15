@@ -8,7 +8,13 @@ class GameController < ApplicationController
 
   def placeships
     game = session[:game]
+    puts "++++++++++++"
+    p params
+    puts "++++++++++++"
     game.enter_coordinates(game.player.ships[params[:ship].to_i], params[:coord], params[:direction])
+    puts"++++++++++++++"
+    p game.player.ships[params[:ship].to_i]
+    puts"++++++++++++++"
     b = game.place_ships(game.player.ships[params[:ship].to_i],'human', game.player.board, params[:ship].to_i)
     game.player.board.board.each do |x|
       x.each do |y|

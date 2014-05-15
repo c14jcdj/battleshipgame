@@ -159,10 +159,12 @@ View.prototype = {
     },
 
     addVert: function(res) {
-        var i = res[0];
-        var j = res[0] + parseInt(res[1].length);
+        console.log(res)
+        var i = res[0] + 1;
+        var j = res[0] + 1 + parseInt(res[1].length);
         for (i; i < j; i++) {
-            $('#player tr:nth-child(' + (res[0] + i) + ') td:nth-child(' + (parseInt(res[1].col) + 1) + ')').css('background-color', 'black')
+            console.log(i)
+            $('#player tr:nth-child(' + (i) + ') td:nth-child(' + (parseInt(res[1].col) + 1) + ')').css('background-color', 'black')
         }
     },
 
