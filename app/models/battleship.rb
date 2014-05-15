@@ -11,7 +11,13 @@ class Battleship
     square = coordinates
     ship.direction = direction
     ship.row = square[0]
-    ship.col = square.length == 3 ? 10 : square[1]
+    if square.length == 3 && square[1..-1] == '10'
+      ship.col = square[1..-1]
+    elsif square.length == 2
+      ship.col = square[1]
+    else
+      ship.col = 'a'
+    end
   end
 
   def computer_attack(board, choices)
@@ -31,7 +37,9 @@ class Battleship
 
   def attack(coord, board)
       taken = $redis.lrange('taken choices', 0, -1)
-      return["Invalid Coordinates"] if coord[1].to_i == 0
+
+      return["Invalid Coordinates"] if (coord[1].to_i == 0) || (coord.length > 3)
+      return["Invalid Coordinates"] if coord.length == 3 && coord[1..-1] != '10'
       return ["You already entered those coordinates"] if taken.include?(coord)
       row = board.row_decoder[coord[0].upcase]
       col = coord.length == 3 ? 10 : coord[1].to_i
@@ -54,6 +62,7 @@ class Battleship
     if player_type == "human"
       row = board.row_decoder[ship.row.upcase]
       return "Invalid Coordinates" if ship.col.to_i == 0
+      return "Must Enter A Direction" if ship.direction == nil
       col = ship.col.to_i
     else
       ship.row = %w(A B C D E F G H I J).sample
@@ -62,7 +71,7 @@ class Battleship
       col = ship.col.to_i
       ship.direction = ["hor", "vert"].sample
     end
-    return "Can't place ship here" if row == nil || col == nil
+    return "Invalid Coordinates" if row == nil || col == nil
     if ship.direction[0] == "h"
       if board.board[row][col...col+ship.length].include?("*") || col+ship.length > 11
         return "Can't place ship here"
