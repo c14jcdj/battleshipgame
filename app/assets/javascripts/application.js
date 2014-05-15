@@ -58,18 +58,21 @@ Game.prototype = {
                 data: data,
                 success: function(res) {
                     console.log(res)
-                    if (res[0] == "HIT") {
-                        view.hit(res[1], res[2], 'computer')
-                        setTimeout(that.compattack, 2000)
-                    } else if (res[0] == "MISS") {
-                        view.miss(res[1], res[2], 'computer')
-                        setTimeout(that.compattack, 2000)
-                    } else {
-                        view.displayError(res[0]);
-                    }
                     if (res.slice(-1)[0] == true) {
+                        view.hit(res[1], res[2], 'computer')
                         setTimeout(view.displayWinner, 1000)
+                    } else {
+                        if (res[0] == "HIT") {
+                            view.hit(res[1], res[2], 'computer')
+                            setTimeout(that.compattack, 2000)
+                        } else if (res[0] == "MISS") {
+                            view.miss(res[1], res[2], 'computer')
+                            setTimeout(that.compattack, 2000)
+                        } else {
+                            view.displayError(res[0]);
+                        }
                     }
+
                 },
                 error: function() {
                     console.log('here i am')

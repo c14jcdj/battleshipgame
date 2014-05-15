@@ -7,14 +7,6 @@ class Battleship
     @computer = computer
   end
 
-  def run
-    # view.print_board(player.board)
-    # place_ships(player.ships, 'human', player.board)
-    # place_ships(computer.ships, 'comp', computer.board)
-    # view.print_board(computer.board)
-    # attack
-  end
-
   def enter_coordinates(ship, coordinates, direction)
     square = coordinates
     ship.direction = direction
@@ -22,35 +14,12 @@ class Battleship
     ship.col = square.length == 3 ? 10 : square[1]
   end
 
-  def get_choice
-    c = (1..100).to_a
-    a = (1..10).to_a
-    b = %w(A B C D E F G H I J)
-    choices = []
-    b.each do |letter|
-      a.each do |num|
-        choices << letter + num.to_s
-      end
-    end
-    Hash[c.zip(choices)]
-  end
-
   def computer_attack(board, choices)
-    # c = board.choices.shuffle.pop
-
-    # choice_hash =  get_choice
-    # choice = choices.shuffle.pop
-    # c = choice_hash[choices]
     c = choices
-    puts"++++++++++++"
-    p c
-    # p board.choices.length
-    puts"++++++++++++"
     row = board.row_decoder[c[0]]
     col = c.length == 3 ? 10 : c[1].to_i
     if board.board[row][col] == "*"
       board.board[row][col] = 'X'
-      # view.print_board(player.board)
       check = winner?(player.board)
       return ["HIT",row,col, check]
     else
@@ -61,38 +30,20 @@ class Battleship
   end
 
   def attack(coord, board)
-    # check = false
-    # until check
-      # view.prompt_attack
-      # attack = gets.chomp
       taken = $redis.lrange('taken choices', 0, -1)
-      puts "+++++++++++++++"
-      p taken
-      puts "+++++++++++++++"
       return["Invalid Coordinates"] if coord[1].to_i == 0
       return ["You already entered those coordinates"] if taken.include?(coord)
       row = board.row_decoder[coord[0].upcase]
       col = coord.length == 3 ? 10 : coord[1].to_i
-      puts "++++++++++++++"
-      p row
-      p col
-      p board.board[row][col]
-      puts "++++++++++++++"
       if board.board[row][col] == "*"
         board.board[row][col] = "X"
         check = winner?(computer.board)
-        # computer_attack
         return ["HIT", row, col, check]
-      # elsif board.board[row][col] == "X" || board.board[row][col] == "/"
-      #     return ["You already entered those coordinates"]
       else
         board.board[row][col] = "/"
         check = winner?(computer.board)
-        # computer_attack
         return ["MISS", row, col, check]
       end
-    # end
-    # puts 'You Win!'
   end
 
   def winner?(board)
