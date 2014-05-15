@@ -64,6 +64,7 @@ class Battleship
     # until check
       # view.prompt_attack
       # attack = gets.chomp
+      return["Invalid Coordinates"] if coord[1].to_i == 0
       row = board.row_decoder[coord[0].upcase]
       col = coord.length == 3 ? 10 : coord[1].to_i
       if board.board[row][col] == "*"
@@ -90,6 +91,7 @@ class Battleship
   def place_ships(ship,player_type, board, shipInd)
     if player_type == "human"
       row = board.row_decoder[ship.row.upcase]
+      return "Enter Number for Column" if ship.col.to_i == 0
       col = ship.col.to_i
     else
       ship.row = %w(A B C D E F G H I J).sample
