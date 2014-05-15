@@ -68,7 +68,7 @@ Game.prototype = {
                         view.displayError(res[0]);
                     }
                     if (res.slice(-1)[0] == true) {
-                        alert('winner')
+                        setTimeout(view.displayWinner, 1000)
                     }
                 },
                 error: function() {
@@ -198,5 +198,9 @@ View.prototype = {
 
     displayLoser: function() {
         alert('Loser!')
+    },
+
+    displayWinner: function() {
+        alert('Winner!')
     }
 }
