@@ -171,12 +171,19 @@ View.prototype = {
     },
 
     addVert: function(res) {
-        console.log(res)
+        var ship = res[1].name
+        var pic = 0
         var i = res[0] + 1;
         var j = res[0] + 1 + parseInt(res[1].length);
         for (i; i < j; i++) {
-            console.log(i)
-            $('#player tr:nth-child(' + (i) + ') td:nth-child(' + (parseInt(res[1].col) + 1) + ')').css('background-color', 'black')
+            $('#player tr:nth-child(' + (i) + ') td:nth-child(' + (parseInt(res[1].col) + 1) + ')').append('<img src="/assets/' + ship + pic + '.png" width="50px">')
+            $('#player tr:nth-child(' + (i) + ') td:nth-child(' + (parseInt(res[1].col) + 1) + ')').css({
+                'transform': 'rotate(90deg)',
+                'width': '50px',
+                'height': '50px'
+            })
+            pic = pic + 1;
+
         }
     },
 
