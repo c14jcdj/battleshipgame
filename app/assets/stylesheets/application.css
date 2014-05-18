@@ -16,6 +16,7 @@ table {
   /*border: 1px solid red;*/
   float: left;
   border-collapse: collapse;
+  background: url('/assets/ocean2.jpg');
 
 }
 
@@ -23,6 +24,7 @@ td {
   border: 1px solid black;
   width: 50px;
   height: 50px;
+
 }
 tr {
   /*border: 1px solid black;*/
@@ -30,14 +32,18 @@ tr {
   height: 50px;
 }
 
+
+
 .col td {
   text-align: center;
   border: none;
+  background: white  ;
 }
 
 tr td:nth-child(1) {
   text-align: center;
   border: none;
+  background: white;
 }
 
 .coord {
@@ -52,3 +58,26 @@ tr td:nth-child(1) {
 h4 {
   text-align: center;
 }
+
+#computer {
+  /*display: none;*/
+}
+
+#player {
+
+}
+
+/*#test {
+  opacity: .8;
+  width: 533px;
+  height: 530px;
+  position: absolute;
+  margin-top: -530px;
+  margin-left: 50px;
+}*/
+
+.playerscreen {
+  overflow: hidden;
+}
+
+
