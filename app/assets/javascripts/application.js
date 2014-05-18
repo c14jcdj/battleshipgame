@@ -176,7 +176,7 @@ View.prototype = {
         var i = res[0] + 1;
         var j = res[0] + 1 + parseInt(res[1].length);
         for (i; i < j; i++) {
-            $('#player tr:nth-child(' + (i) + ') td:nth-child(' + (parseInt(res[1].col) + 1) + ')').append('<img src="/assets/' + ship + pic + '.png" width="50px">').css('transform', 'rotate(90deg)')
+            $('#player tr:nth-child(' + (i) + ') td:nth-child(' + (parseInt(res[1].col) + 1) + ')').append('<img src="/assets/v' + ship + pic + '.png" width="50px" height="50px">')
             pic = pic + 1;
 
         }
