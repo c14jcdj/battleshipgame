@@ -159,10 +159,14 @@ View.prototype = {
         var length = parseInt(res[1].length)
         var tile = length * 50
         var row = res[0]
-        // $('#player tr:eq(' + row + ') td:lt(6):gt(0)').css('background-image', '<img src="/assets/battleship.png">')
+        var pic = 0
+        // $('#player tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').attr('colspan', 5)
+        // $('#player tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').append('<img src="/assets/battleship.png" position="fixed" colspan="5" height="50px" width="' + tile + 'px">')
+        // $('#player tr:eq(' + row + ') td:lt(11):gt(6)').remove()
         // $('#player tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').append('<img src="/assets/battleship.png" position="fixed" colspan="5" height="50px" width="' + tile + 'px">')
         for (i; i < j; i++) {
-            $('#player tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').css('background-color', 'black')
+            $('#player tr:nth-child(' + (res[0] + 1) + ') td:nth-child(' + (i + 1) + ')').append('<img src="/assets/ac' + pic + '.png" width="50px">')
+            pic = pic + 1;
         }
     },
 
