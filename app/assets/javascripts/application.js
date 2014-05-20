@@ -193,7 +193,7 @@ View.prototype = {
         console.log(col)
         console.log(row)
         $('.error').empty();
-        $('#' + table + ' tr:nth-child(' + (row + 1) + ') td:nth-child(' + (col + 1) + ')').css('background-color', 'red')
+        $('#' + table + ' tr:nth-child(' + (row + 1) + ') td:nth-child(' + (col + 1) + ')').html('<img src="/assets/hit.png" width="50px" height="50px">')
     },
 
     miss: function(row, col, table) {
@@ -201,8 +201,10 @@ View.prototype = {
         console.log(col)
         console.log(row)
         $('.error').empty();
-        $('#' + table + ' tr:nth-child(' + (row + 1) + ') td:nth-child(' + (col + 1) + ')').css('background-color', 'blue')
-
+        $('#' + table + ' tr:nth-child(' + (row + 1) + ') td:nth-child(' + (col + 1) + ')').html('<img src="/assets/miss1.png" width="50px" height="50px">')
+        setTimeout(function() {
+            $('#' + table + ' tr:nth-child(' + (row + 1) + ') td:nth-child(' + (col + 1) + ')').html('<img src="/assets/white.jpg" width="50px" height="50px">')
+        }, 2000)
     },
 
     displayError: function(res) {
