@@ -12,6 +12,28 @@
  *= require_tree .
  */
 
+body {
+  height: 1200px;
+  background-color: brown;
+  color: white;
+  background: black;
+
+
+}
+
+.logo {
+  width: 75%;
+  height: 200px;
+
+}
+
+.logo img {
+  width: 100%;
+  margin-left: 18%;
+  height: 250px;
+}
+
+
 table {
   /*border: 1px solid red;*/
   float: left;
@@ -41,13 +63,15 @@ img {
 .col td {
   text-align: center;
   border: none;
-  background: white  ;
+  background: black;
+
 }
 
 tr td:nth-child(1) {
   text-align: center;
   border: none;
-  background: white;
+  background: black;
+
 }
 
 tr:nth-child(11) td:nth-child(1) {
@@ -56,43 +80,51 @@ tr:nth-child(11) td:nth-child(1) {
 
 .coord {
   border: 1px solid black;
-  margin-top: 5%;
   width: 100%;
+  margin-top: 5%;
   height: 100px;
-}
-
-form {
   text-align: center;
 }
 
-h2 {
-  width: 25%;
+
+
+form {
+  text-align: center;
+  font-size: 1.5em;
 }
+
+
 
 .titles {
-  border: 1px solid blue;
-  height: 200px;
+  width: 90%;
+  margin: auto;
+  padding: 0;
 }
 
-.playertitle {
-  border: 1px solid red;
-  width: 50%;
-  float: left;
+.player {
+  display: inline-block;
+  width: 40.5%;
+  text-align: center;
 }
 
-.comptitle {
-  border: 1px solid red;
-  width: 48%;
+.comp {
+  display: inline-block;
+  width: 49.5%;
+  text-align: center;
+  margin-left: 100px;
 }
 
 
 #computer {
   /*display: none;*/
+  margin-left: 10px;
 }
 
 #player {
 
 }
+
+
 
 
 

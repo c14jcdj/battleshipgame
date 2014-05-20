@@ -1,6 +1,6 @@
-
+<div class="logo"><img src="assets/logo.jpg" alt=""></div>
 <div class='coord'>
-    <h4>Enter Coordinates for your <span>Aircraft Carrier</span></h4>
+    <h1>Enter Coordinates for your <span>Aircraft Carrier</span></h1>
 <%= form_tag("game/placeships", method: "get") do %>
   <%= label_tag(:coord, "Starting Square:") %>
   <%= text_field_tag(:coord) %>
@@ -15,8 +15,8 @@
 </div>
 
 <div class="titles">
-    <div class="playertitle"><h2>Your Fleet</h2></div>
-    <div class="comptitle"><h2>Enemy Fleet</h2></div>
+<div class="player"><h1>Your Fleet</h1></div>
+<div class="comp"><h1>Enemy Fleet</h1></div>
 </div>
 <div class="playerscreen">
 <table id="player">
