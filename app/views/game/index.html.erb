@@ -1,3 +1,23 @@
+
+<div class='coord'>
+    <h4>Enter Coordinates for your <span>Aircraft Carrier</span></h4>
+<%= form_tag("game/placeships", method: "get") do %>
+  <%= label_tag(:coord, "Starting Square:") %>
+  <%= text_field_tag(:coord) %>
+  <%= radio_button_tag(:direction, "horizontal") %>
+  <%= label_tag(:direction, "Horizontal (right)") %>
+  <%= radio_button_tag(:direction, "vertical") %>
+  <%= label_tag(:direction, "Vertical (down)") %>
+  <%= submit_tag "Enter Coordinates", class: "coordinates" %>
+<% end %>
+
+<div class="shiploc"></div>
+</div>
+
+<div class="titles">
+    <div class="playertitle"><h2>Your Fleet</h2></div>
+    <div class="comptitle"><h2>Enemy Fleet</h2></div>
+</div>
 <div class="playerscreen">
 <table id="player">
   <tr class="col">
@@ -144,20 +164,7 @@
     <td></td>
   </tr>
 </table>
-<div class='coord'>
-    <h4>Enter Coordinates for your <span>Aircraft Carrier</span></h4>
-<%= form_tag("game/placeships", method: "get") do %>
-  <%= label_tag(:coord, "Starting Square:") %>
-  <%= text_field_tag(:coord) %><br>
-  <%= radio_button_tag(:direction, "horizontal") %>
-  <%= label_tag(:direction, "Horizontal (right)") %><br>
-  <%= radio_button_tag(:direction, "vertical") %>
-  <%= label_tag(:direction, "Vertical (down)") %>
-  <%= submit_tag "Enter Coordinates", class: "coordinates" %>
-<% end %>
 
-<div class="shiploc"></div>
-</div>
 
 <div id="test"></div>
 
